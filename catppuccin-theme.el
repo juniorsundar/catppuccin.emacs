@@ -107,7 +107,8 @@ Must be one of `mocha`, `macchiato`, `frappe`, or `latte`."
            (const :tag "Mocha" mocha)
            (const :tag "Macchiato" macchiato)
            (const :tag "Frappe" frappe)
-           (const :tag "Latte" latte))
+           (const :tag "Latte" latte)
+           (const :tag "Cyberdream" cyberdream))
   :group 'catppuccin)
 
 (defun define-catppuccin-flavor (flavor colors)
@@ -140,7 +141,8 @@ The colors used will correspond to those in COLORS."
     (define-catppuccin-flavor 'mocha (funcall flavor 'mocha))
     (define-catppuccin-flavor 'macchiato (funcall flavor 'macchiato))
     (define-catppuccin-flavor 'frappe (funcall flavor 'frappe))
-    (define-catppuccin-flavor 'latte (funcall flavor 'latte))))
+    (define-catppuccin-flavor 'latte (funcall flavor 'latte))
+    (define-catppuccin-flavor 'cyberdream (funcall flavor 'cyberdream))))
 
 ;; load-file-name is only available when the module is loaded
 ;; with `load', which is also used by `require'
@@ -210,7 +212,7 @@ or `mocha'."
     (list
       (intern (completing-read
                 "Catppuccin flavor: "
-                '(frappe latte macchiato mocha)
+                '(frappe latte macchiato mocha cyberdream)
                 nil   ; predicate
                 t)))) ; require-match
   (setq catppuccin-flavor flavor)
@@ -349,7 +351,7 @@ FLAVOR defaults to the value of `catppuccin-flavor'."
          (line-number :inherit default :foreground ,ctp-surface1
            :background ,ctp-base)
          (line-number-current-line :inherit line-number
-           :foreground ,ctp-lavender)
+           :foreground ,ctp-text)
          (match :background ,ctp-red :foreground ,ctp-mantle)
          (menu :background ,ctp-current :inverse-video nil
            :foreground ,ctp-text)
@@ -475,12 +477,12 @@ FLAVOR defaults to the value of `catppuccin-flavor'."
          (completions-first-difference :foreground ,ctp-text)
 
          ;; diff-hl
-         (diff-hl-change :background ,ctp-blue
-           :foreground ,(catppuccin-darken ctp-blue 50))
-         (diff-hl-delete :background ,ctp-red
-           :foreground ,(catppuccin-darken ctp-red 50))
-         (diff-hl-insert :background ,ctp-green
-           :foreground ,(catppuccin-darken ctp-green 50))
+         (diff-hl-change :background ,ctp-base
+           :foreground ,ctp-blue)
+         (diff-hl-delete :background ,ctp-base
+           :foreground ,ctp-red)
+         (diff-hl-insert :background ,ctp-base
+           :foreground ,ctp-green)
 
          ;; diff-mode
          (diff-header :foreground ,ctp-blue)
